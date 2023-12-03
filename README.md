@@ -1,3 +1,3 @@
 # bonsaiOS
 
-This is a RISC-V 64-bit operating system.
+This is a RISC-V 32-bit operating system.
