@@ -6,6 +6,7 @@ C_SRCS = \
 K_SRCS = \
 	$K/main.c \
 	$K/regsinit.c \
+	$K/riscvregs.c \
 	$K/stack.c \
 	$K/stackinit.S
 
