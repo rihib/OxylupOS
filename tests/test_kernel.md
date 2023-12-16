@@ -1,29 +1,33 @@
-# Test stackinit
+# Test kernel
 
 ```bash
-$ make DEBUG=1
-clang -ffreestanding -fno-common -fno-pie -fno-stack-protector -I. -MD -mcmodel=medany -mno-relax -nostdlib -O2 -std=c2x -Wall -Werror -Wextra --target=riscv64 -ggdb3 -gdwarf-5 -DCORES=1 -Wl,-Tkernel/kernel.ld -z max-page-size=4096 -Wl,-Map=kernel/kernel.map -o kernel/kernel.elf common/main.c kernel/main.c kernel/regsinit.c kernel/stack.c kernel/stackinit.S
+% make DEBUG=1
+clang -ffreestanding -fno-common -fno-pie -fno-stack-protector -I. -MD -mcmodel=medany -mno-relax -nostdlib -O2 -std=c2x -Wall -Werror -Wextra --target=riscv64 -ggdb3 -gdwarf-5 -DCORES=1 -Wl,-Tkernel/kernel.ld -z max-page-size=4096 -Wl,-Map=kernel/kernel.map -o kernel/kernel.elf common/main.c kernel/main.c kernel/regsinit.c kernel/riscvregs.c kernel/stack.c kernel/stackinit.S kernel/stdio.c kernel/uart.c
 qemu-system-riscv64 -bios none -global virtio-mmio.force-legacy=false -m 128M -machine virt -nographic --no-reboot -serial mon:stdio -smp 1 -kernel kernel/kernel.elf
+
+bonsaiOS starts booting!!
+Welcome to bonsaiOS!!
+
 QEMU 8.1.2 monitor - type 'help' for more information
 (qemu) info registers
 
 CPU#0
  V      =   0
- pc       0000000080000022
+ pc       00000000800000d8
  mhartid  0000000000000000
- mstatus  0000000a00000000
+ mstatus  0000000a00000080
  hstatus  0000000200000000
  vsstatus 0000000a00000000
  mip      0000000000000080
- mie      0000000000000000
- mideleg  0000000000000000
+ mie      0000000000000222
+ mideleg  0000000000003666
  hideleg  0000000000000000
- medeleg  0000000000000000
+ medeleg  000000000000bfff
  hedeleg  0000000000000000
  mtvec    0000000000000000
  stvec    0000000000000000
  vstvec   0000000000000000
- mepc     0000000000000000
+ mepc     0000000080000020
  sepc     0000000000000000
  vsepc    0000000000000000
  mcause   0000000000000000
@@ -36,10 +40,10 @@ CPU#0
  mscratch 0000000000000000
  sscratch 0000000000000000
  satp     0000000000000000
- x0/zero  0000000000000000 x1/ra    000000008000001e x2/sp    0000000080001030 x3/gp    0000000000000000
+ x0/zero  0000000000000000 x1/ra    00000000800000f2 x2/sp    0000000080001410 x3/gp    0000000000000000
  x4/tp    0000000000000000 x5/t0    0000000080000000 x6/t1    0000000000000000 x7/t2    0000000000000000
- x8/s0    0000000000000000 x9/s1    0000000000000000 x10/a0   0000000000001000 x11/a1   0000000000000001
- x12/a2   0000000000001028 x13/a3   0000000000000000 x14/a4   0000000000000000 x15/a5   0000000000000000
+ x8/s0    0000000000000000 x9/s1    0000000000000000 x10/a0   00000000800000c8 x11/a1   0000000000000001
+ x12/a2   0000000000000020 x13/a3   0000000000001800 x14/a4   0000000000000000 x15/a5   0000000000000000
  x16/a6   0000000000000000 x17/a7   0000000000000000 x18/s2   0000000000000000 x19/s3   0000000000000000
  x20/s4   0000000000000000 x21/s5   0000000000000000 x22/s6   0000000000000000 x23/s7   0000000000000000
  x24/s8   0000000000000000 x25/s9   0000000000000000 x26/s10  0000000000000000 x27/s11  0000000000000000
@@ -53,6 +57,8 @@ CPU#0
  f24/fs8  0000000000000000 f25/fs9  0000000000000000 f26/fs10 0000000000000000 f27/fs11 0000000000000000
  f28/ft8  0000000000000000 f29/ft9  0000000000000000 f30/ft10 0000000000000000 f31/ft11 0000000000000000
 (qemu) q
-$ llvm-addr2line -e kernel/kernel.elf 80000022
-/Users/rihib/bonsaiOS/kernel/regsinit.c:4
+% llvm-addr2line -e kernel/kernel.elf 800000d8
+/Users/rihib/dev/sechack/bonsaiOS/kernel/main.c:24
+% make clean
+rm -f kernel/kernel.elf kernel/kernel.map common/*.o common/*.d kernel/*.o kernel/*.d
 ```

@@ -1,7 +1,7 @@
 ENTRY(stackinit)
 
 SECTIONS {
-  . = 0x80000000;
+  . = 0x80000000; /* QEMU */
 
   .text : ALIGN(4096) {
     KEEP(*(.text.boot));

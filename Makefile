@@ -8,7 +8,9 @@ K_SRCS = \
 	$K/regsinit.c \
 	$K/riscvregs.c \
 	$K/stack.c \
-	$K/stackinit.S
+	$K/stackinit.S \
+	$K/stdio.c \
+	$K/uart.c
 
 C_OBJS = $(C_SRCS:.c=.o)
 K_OBJS = $(K_SRCS:.c=.o)
