@@ -9,22 +9,12 @@ void main(void) {
 
   if (cpuid == 0) {
     uartinit();
-    putchar('H');
-    putchar('e');
-    putchar('l');
-    putchar('l');
-    putchar('o');
-    putchar(',');
-    putchar(' ');
-    putchar('w');
-    putchar('o');
-    putchar('r');
-    putchar('l');
-    putchar('d');
-    putchar('!');
-    putchar('?');
-    putchar('\b');
-    putchar('\n');
+    if (putchar('\n') == EOF) panic("putchar() failed at kernel/main():12");
+    if (puts("bonsaiOS starts booting!!") == EOF)
+      panic("puts() failed at kernel/main():13");
+    if (puts("Welcome to bonsaiOS!!") == EOF)
+      panic("puts() failed at kernel/main():15");
+    if (putchar('\n') == EOF) panic("putchar() failed at kernel/main():17");
     booted = true;
   } else {
     while (!booted)

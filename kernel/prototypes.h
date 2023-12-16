@@ -5,10 +5,6 @@
 // main.c
 void main(void);
 
-// printf.c
-void printf(const char *fmt, ...);
-void putchar(int c);
-
 // regsinit.c
 void regsinit(void);
 
@@ -17,6 +13,11 @@ void set_mstatus_mpp(char mode);
 
 // stackinit.S
 void stackinit(void);
+
+// stdio.c
+void panic(const char *s);
+int putchar(int c);
+int puts(const char *s);
 
 // uart.c
 void uartinit(void);

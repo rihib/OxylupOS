@@ -13,3 +13,5 @@ typedef uint32_t size_t;
 typedef uint8_t bool_t;
 #define true 1
 #define false 0
+
+#define EOF (-1)
