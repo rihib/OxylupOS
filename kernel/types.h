@@ -9,3 +9,7 @@ typedef uint32_t size_t;
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
+
+typedef uint8_t bool_t;
+#define true 1
+#define false 0
