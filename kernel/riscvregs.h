@@ -55,7 +55,7 @@ static inline void write_satp(uint64_t val) {
   __asm__ __volatile__("csrw satp, %0" : : "r"(val));
 }
 
-// Other Registers
+// Others
 static inline uint64_t read_tp(void) {
   uint64_t val;
   __asm__ __volatile__("mv %0, tp" : "=r"(val));

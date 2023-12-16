@@ -5,10 +5,12 @@ C_SRCS = \
 	$C/main.c
 K_SRCS = \
 	$K/main.c \
+	$K/printf.c \
 	$K/regsinit.c \
 	$K/riscvregs.c \
 	$K/stack.c \
-	$K/stackinit.S
+	$K/stackinit.S \
+	$K/uart.c
 
 C_OBJS = $(C_SRCS:.c=.o)
 K_OBJS = $(K_SRCS:.c=.o)
