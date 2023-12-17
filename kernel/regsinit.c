@@ -2,7 +2,7 @@
 #include "riscvregs.h"
 #include "types.h"
 
-void regsinit(void) {
+void initregs(void) {
   int hartid = (int)read_mhartid();
   write_tp(hartid);
   set_mstatus_mpp('S');

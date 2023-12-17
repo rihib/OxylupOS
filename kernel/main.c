@@ -9,10 +9,12 @@ void main(void) {
   int cpuid = (int)read_tp();
 
   if (cpuid == 0) {
-    uartinit();
+    inituart();
     if (printf("\nbonsaiOS starts booting!!\n") == EOF) {
       PANIC("Cannot print");
     }
+    inittrap();
+    __asm__ __volatile__("unimp");
     if (printf("Welcome to bonsaiOS!!\n\n") == EOF) {
       PANIC("Cannot print");
     }
@@ -21,6 +23,4 @@ void main(void) {
     while (!booted)
       ;
   }
-
-  PANIC("SUCCESS!!");
 }

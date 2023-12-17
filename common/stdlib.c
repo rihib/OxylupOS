@@ -2,27 +2,18 @@
 
 char *itoa(int num, char *str, int base) {
   int i = 0;
-  bool_t is_negative = false;
+  unsigned int unum = (unsigned int)num;
 
-  if (num == 0) {
+  if (unum == 0) {
     str[i++] = '0';
     str[i] = '\0';
     return str;
   }
 
-  if (num < 0 && base == 10) {
-    is_negative = true;
-    num = -num;
-  }
-
-  while (num != 0) {
-    int rem = num % base;
+  while (unum != 0) {
+    int rem = unum % base;
     str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
-    num = num / base;
-  }
-
-  if (is_negative) {
-    str[i++] = '-';
+    unum = unum / base;
   }
 
   str[i] = '\0';
