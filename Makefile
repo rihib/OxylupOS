@@ -2,7 +2,7 @@ C = common
 K = kernel
 
 C_SRCS = \
-	$C/main.c
+	$C/stdlib.c
 K_SRCS = \
 	$K/main.c \
 	$K/regsinit.c \
@@ -10,6 +10,7 @@ K_SRCS = \
 	$K/stack.c \
 	$K/stackinit.S \
 	$K/stdio.c \
+	$K/trap.c \
 	$K/uart.c
 
 C_OBJS = $(C_SRCS:.c=.o)

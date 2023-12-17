@@ -1,4 +1,4 @@
-ENTRY(stackinit)
+ENTRY(initstack)
 
 SECTIONS {
   . = 0x80000000; /* QEMU */

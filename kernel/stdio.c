@@ -1,12 +1,10 @@
 #include "stdio.h"
 
-#include "common/prototypes.h"
+#include "common/stdlib.h"
 #include "prototypes.h"
 #include "types.h"
 
 int printf(const char *fmt, ...) {
-  char buf[12];
-  const char *s;
   int count = 0;
   va_list ap;
 
@@ -15,6 +13,7 @@ int printf(const char *fmt, ...) {
   }
 
   va_start(ap, fmt);
+  const char *s;
   while (*fmt) {
     if (*fmt != '%') {
       if (putchar(*fmt) == EOF) {
@@ -30,7 +29,8 @@ int printf(const char *fmt, ...) {
           }
           count++;
           break;
-        case 'd':
+        case 'd': {
+          char buf[12];
           itoa(va_arg(ap, int), buf, 10);
           s = buf;
           while (*s) {
@@ -40,6 +40,7 @@ int printf(const char *fmt, ...) {
             count++;
           }
           break;
+        }
         case 's':
           s = va_arg(ap, const char *);
           while (*s) {
@@ -49,6 +50,18 @@ int printf(const char *fmt, ...) {
             count++;
           }
           break;
+        case 'x': {
+          char buf[9];
+          itoa(va_arg(ap, int), buf, 16);
+          s = buf;
+          while (*s) {
+            if (putchar(*s++) == EOF) {
+              return EOF;
+            }
+            count++;
+          }
+          break;
+        }
         default:
           if (putchar('%') == EOF) {
             return EOF;

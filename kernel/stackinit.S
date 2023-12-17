@@ -1,6 +1,6 @@
 .section .text.boot
-.global stackinit
-stackinit:
+.global initstack
+initstack:
   .equ STACK_SIZE, 4096
 
   la sp, stack
@@ -9,6 +9,6 @@ stackinit:
   addi a1, a1, 1
   mul a0, a0, a1
   add sp, sp, a0
-  call regsinit
+  call initregs
 halt:
   j halt
