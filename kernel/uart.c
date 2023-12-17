@@ -14,8 +14,9 @@ void uartinit(void) {
 
 void uartputchar(uint8_t c, bool_t can_interrupt) {
   if (!can_interrupt) {
-    while ((read_uart(LSR) & 0b00100000) == 0)
+    while ((read_uart(LSR) & 0b00100000) == 0) {
       ;
+    }
     write_uart(THR, c);
     return;
   }

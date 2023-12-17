@@ -15,7 +15,7 @@ void set_mstatus_mpp(char mode);
 void stackinit(void);
 
 // stdio.c
-void panic(const char *s);
+int printf(const char *fmt, ...);
 int putchar(int c);
 int puts(const char *s);
 
