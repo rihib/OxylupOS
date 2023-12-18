@@ -10,12 +10,12 @@ void main(void) {
 
   if (cpuid == 0) {
     inituart();
-    if (printf("\nbonsaiOS starts booting!!\n") == EOF) {
+    if (printf("\nOxylupOS starts booting!!\n") == EOF) {
       PANIC("Cannot print");
     }
     inittrap();
     __asm__ __volatile__("unimp");
-    if (printf("Welcome to bonsaiOS!!\n\n") == EOF) {
+    if (printf("Welcome to OxylupOS!!\n\n") == EOF) {
       PANIC("Cannot print");
     }
     booted = true;
