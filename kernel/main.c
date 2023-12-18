@@ -1,7 +1,7 @@
 #include "prototypes.h"
 #include "riscvregs.h"
 #include "stdio.h"
-#include "types.h"
+#include "common/types.h"
 
 // TODO: Make OS 32-bit compatible
 

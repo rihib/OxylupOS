@@ -1,7 +1,7 @@
 #include "riscvregs.h"
 
 #include "stdio.h"
-#include "types.h"
+#include "common/types.h"
 
 void set_mstatus_mpp(char mode) {
   uint64_t mstatus = read_mstatus();

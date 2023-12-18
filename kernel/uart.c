@@ -1,6 +1,6 @@
 #include "uart.h"
 
-#include "types.h"
+#include "common/types.h"
 
 void inituart(void) {
   write_uart(IER, 0b00000000);

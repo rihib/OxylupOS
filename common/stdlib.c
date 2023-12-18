@@ -1,4 +1,4 @@
-#include "kernel/types.h"
+#include "types.h"
 
 char *itoa(int num, char *str, int base) {
   int i = 0;

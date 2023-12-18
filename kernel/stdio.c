@@ -2,7 +2,7 @@
 
 #include "common/stdlib.h"
 #include "prototypes.h"
-#include "types.h"
+#include "common/types.h"
 
 int printf(const char *fmt, ...) {
   int count = 0;

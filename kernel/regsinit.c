@@ -1,6 +1,6 @@
 #include "prototypes.h"
 #include "riscvregs.h"
-#include "types.h"
+#include "common/types.h"
 
 void initregs(void) {
   int hartid = (int)read_mhartid();
