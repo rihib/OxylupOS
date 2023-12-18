@@ -3,6 +3,8 @@
 #include "stdio.h"
 #include "types.h"
 
+// TODO: Make OS 32-bit compatible
+
 static __volatile__ bool_t booted = false;
 
 void main(void) {
