@@ -1,14 +1,17 @@
 #pragma once
 
 #include "common/types.h"
+#include "proc.h"
 
 // main.c
 void main(void);
 
-// regsinit.c
-void initregs(void);
+// proc.c
+struct pcb *initproc(uintptr_t pc);
+void switch_context(uintptr_t *prev_context, uintptr_t *next_context);
 
 // riscvregs.c
+void initregs(void);
 void set_mstatus_mpp(char mode);
 
 // stackinit.S

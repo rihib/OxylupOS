@@ -1,1 +1,1 @@
-__attribute__((aligned(16))) char stack[4096 * CORES];
+__attribute__((aligned(16))) char stack[4096 * NPROC];

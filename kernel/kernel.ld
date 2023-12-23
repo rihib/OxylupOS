@@ -5,18 +5,18 @@ SECTIONS {
 
   .text : ALIGN(4096) {
     KEEP(*(.text.boot));
-    *(.text .text.*)
+    *(.text .text.*);
   }
 
   .rodata : ALIGN(16) {
-    *(.rodata .rodata.* .srodata .srodata.*)
+    *(.rodata .rodata.* .srodata .srodata.*);
   }
 
   .data : ALIGN(16) {
-    *(.data .data.* .sdata .sdata.*)
+    *(.data .data.* .sdata .sdata.*);
   }
 
   .bss : ALIGN(16) {
-    *(.bss .bss.* .sbss .sbss.*)
+    *(.bss .bss.* .sbss .sbss.*);
   }
 }
