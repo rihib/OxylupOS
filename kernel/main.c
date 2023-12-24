@@ -5,6 +5,7 @@
 #include "stdio.h"
 
 // TODO: Make OS 32-bit compatible
+// TODO: Make comprehensive tests
 
 struct pcb *proca;
 struct pcb *procb;
@@ -12,7 +13,7 @@ struct pcb *procb;
 void proca_func(void) {
   printf("procA\n");
   while (1) {
-    switch_context(&proca->sp, &procb->sp);
+    sched_yield();
     putchar('A');
     for (int i = 0; i < 100000000; i++) {
       __asm__ __volatile__("nop");
@@ -23,7 +24,7 @@ void proca_func(void) {
 void procb_func(void) {
   printf("procB\n");
   while (1) {
-    switch_context(&procb->sp, &proca->sp);
+    sched_yield();
     putchar('B');
     for (int i = 0; i < 100000000; i++) {
       __asm__ __volatile__("nop");
@@ -42,9 +43,10 @@ void main(void) {
       PANIC("Cannot print");
     }
 
+    initidleproc();
     proca = initproc((uintptr_t)proca_func);
     procb = initproc((uintptr_t)procb_func);
-    proca_func();
+    sched_yield();
     PANIC("Failed to boot");
 
     if (printf("Welcome to OxylupOS!!\n\n") == EOF) {

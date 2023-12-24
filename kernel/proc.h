@@ -2,7 +2,8 @@
 
 #include "common/types.h"
 
-#define NPROC_LIMIT 8
+#define NPROC 8
+#define IDLEPID -1
 
 enum procstate { UNUSED, RUNNABLE };
 

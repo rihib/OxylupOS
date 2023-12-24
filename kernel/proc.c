@@ -4,38 +4,40 @@
 #include "common/types.h"
 #include "stdio.h"
 
-// TODO: マルチコア対応
+// TODO: Multicore support. Maybe need to save cpu state?
 
-struct pcb procs[NPROC_LIMIT];
+struct pcb proctable[NPROC];
+struct pcb *currproc;
+struct pcb *idleproc;
+
+void initidleproc(void) {
+  idleproc = initproc((uintptr_t)NULL);
+  idleproc->pid = IDLEPID;
+  currproc = idleproc;
+}
 
 struct pcb *initproc(uintptr_t pc) {
+  // Find unused process and return it after initializing
   struct pcb *proc = NULL;
-  int i;
-  for (i = 0; i < NPROC_LIMIT; i++) {
-    if (procs[i].state == UNUSED) {
-      proc = &procs[i];
-      break;
+  for (int i = 0; i < NPROC; i++) {
+    if (proctable[i].state == UNUSED) {
+      proc = &proctable[i];
+      uintptr_t *sp = (uintptr_t *)&proc->kstack[sizeof(proc->kstack)];
+      memset(proc->kstack, 0, sizeof(proc->kstack));
+      proc->pid = i + 1;
+      proc->state = RUNNABLE;
+      proc->sp = (uintptr_t)sp;
+      proc->kstack[sizeof(proc->kstack)] = pc;
+      return proc;
     }
   }
-  if (!proc) {
-    PANIC("Cannot create new process due to maximum number of processes");
-  }
-
-  proc->pid = i + 1;
-  proc->state = RUNNABLE;
-
-  uintptr_t *sp = (uintptr_t *)&proc->kstack[12];
-  proc->sp = (uintptr_t)sp;
-
-  memset(proc->kstack, 0, sizeof(proc->kstack));
-  proc->kstack[12] = pc;
-
-  return proc;
+  PANIC("Cannot create new process due to maximum number of processes");
 }
 
 __attribute__((naked)) void switch_context(uintptr_t *prev_context,
                                            uintptr_t *next_context) {
   __asm__ __volatile__(
+      // Save current context
       "addi sp, sp, -13 * 8\n"
       "sd ra, 0 * 8(sp)\n"
       "sd s0, 1 * 8(sp)\n"
@@ -51,6 +53,7 @@ __attribute__((naked)) void switch_context(uintptr_t *prev_context,
       "sd s10, 11 * 8(sp)\n"
       "sd s11, 12 * 8(sp)\n"
       "sd sp, (a0)\n"
+      // Restore next process context
       "ld sp, (a1)\n"
       "ld ra, 0 * 8(sp)\n"
       "ld s0, 1 * 8(sp)\n"
