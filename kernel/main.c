@@ -5,6 +5,7 @@
 #include "stdio.h"
 
 // TODO: Make OS 32-bit compatible
+// TODO: Make comprehensive tests
 
 struct pcb *proca;
 struct pcb *procb;

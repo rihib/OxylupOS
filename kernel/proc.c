@@ -17,28 +17,21 @@ void initidleproc(void) {
 }
 
 struct pcb *initproc(uintptr_t pc) {
-  // Find unused process
+  // Find unused process and return it after initializing
   struct pcb *proc = NULL;
-  int i;
-  for (i = 0; i < NPROC; i++) {
+  for (int i = 0; i < NPROC; i++) {
     if (proctable[i].state == UNUSED) {
       proc = &proctable[i];
-      break;
+      uintptr_t *sp = (uintptr_t *)&proc->kstack[sizeof(proc->kstack)];
+      memset(proc->kstack, 0, sizeof(proc->kstack));
+      proc->pid = i + 1;
+      proc->state = RUNNABLE;
+      proc->sp = (uintptr_t)sp;
+      proc->kstack[sizeof(proc->kstack)] = pc;
+      return proc;
     }
   }
-  if (!proc) {
-    PANIC("Cannot create new process due to maximum number of processes");
-  }
-
-  // Initialize process
-  uintptr_t *sp = (uintptr_t *)&proc->kstack[12];
-  memset(proc->kstack, 0, sizeof(proc->kstack));
-  proc->pid = i + 1;
-  proc->state = RUNNABLE;
-  proc->sp = (uintptr_t)sp;
-  proc->kstack[12] = pc;
-
-  return proc;
+  PANIC("Cannot create new process due to maximum number of processes");
 }
 
 __attribute__((naked)) void switch_context(uintptr_t *prev_context,
