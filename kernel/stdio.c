@@ -1,14 +1,14 @@
 #include "stdio.h"
 
 #include "common/stdlib.h"
+#include "common/types.h"
 #include "prototypes.h"
-#include "types.h"
 
 int printf(const char *fmt, ...) {
   int count = 0;
   va_list ap;
 
-  if (fmt == NULL) {
+  if (!fmt) {
     PANIC("fmt is NULL");
   }
 
@@ -78,7 +78,7 @@ int printf(const char *fmt, ...) {
 }
 
 int puts(const char *s) {
-  if (s == NULL) {
+  if (!s) {
     s = "(null)";
   }
   printf(s);

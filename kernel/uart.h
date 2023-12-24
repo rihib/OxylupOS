@@ -1,4 +1,4 @@
-#include "types.h"
+#include "common/types.h"
 
 // 16550 UART
 #define UART0 0x10000000LL  // QEMU

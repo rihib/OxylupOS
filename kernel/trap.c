@@ -1,7 +1,7 @@
+#include "common/types.h"
 #include "prototypes.h"
 #include "riscvregs.h"
 #include "stdio.h"
-#include "types.h"
 
 void inittrap(void) { write_stvec((uint64_t)trapentry); }
 

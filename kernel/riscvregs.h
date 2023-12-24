@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include "common/types.h"
 
 // FIXME: Maybe macros are better?
 // FIXME: Better to remove duplicated code
