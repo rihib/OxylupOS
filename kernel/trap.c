@@ -7,6 +7,7 @@ void inittrap(void) { write_stvec((uint64_t)trapentry); }
 
 __attribute__((naked)) __attribute__((aligned(4))) void trapentry(void) {
   __asm__ __volatile__(
+      // Save current context before trap handling
       "addi sp, sp, -8 * 31\n"
       "sd ra, 8 * 0(sp)\n"
       "sd gp, 8 * 1(sp)\n"
@@ -42,6 +43,7 @@ __attribute__((naked)) __attribute__((aligned(4))) void trapentry(void) {
 
       "call traphandler\n"
 
+      // Restore current context
       "ld ra, 8 * 0(sp)\n"
       "ld gp, 8 * 1(sp)\n"
       // tp is not restored in case cpu is switched during trap handling

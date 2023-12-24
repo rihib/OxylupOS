@@ -7,6 +7,7 @@ K_SRCS = \
 	$K/main.c \
 	$K/proc.c \
 	$K/riscvregs.c \
+	$K/sched.c \
 	$K/stack.c \
 	$K/stackinit.S \
 	$K/stdio.c \
@@ -79,11 +80,11 @@ ifdef GDB
 	QEMUOPTS += -S -gdb tcp::25501
 endif
 
-ifdef NPROC
-	CFLAGS += -DNPROC=$(NPROC)
-	QEMUOPTS += -smp $(NPROC)
+ifdef NCORE
+	CFLAGS += -DNCORE=$(NCORE)
+	QEMUOPTS += -smp $(NCORE)
 else
-	CFLAGS += -DNPROC=1
+	CFLAGS += -DNCORE=1
 	QEMUOPTS += -smp 1
 endif
 

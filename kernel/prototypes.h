@@ -7,12 +7,16 @@
 void main(void);
 
 // proc.c
+void initidleproc(void);
 struct pcb *initproc(uintptr_t pc);
 void switch_context(uintptr_t *prev_context, uintptr_t *next_context);
 
 // riscvregs.c
 void initregs(void);
 void set_mstatus_mpp(char mode);
+
+// sched.c
+void sched_yield(void);
 
 // stackinit.S
 void initstack(void);
