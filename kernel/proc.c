@@ -12,7 +12,7 @@ struct pcb *idleproc;
 
 void initidleproc(void) {
   idleproc = initproc((uintptr_t)NULL);
-  idleproc->pid = IDLEPROC_PID;
+  idleproc->pid = IDLEPID;
   currproc = idleproc;
 }
 

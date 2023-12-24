@@ -3,7 +3,7 @@
 #include "common/types.h"
 
 #define NPROC 8
-#define IDLEPROC_PID -1
+#define IDLEPID -1
 
 enum procstate { UNUSED, RUNNABLE };
 
