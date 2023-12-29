@@ -1,0 +1,5 @@
+#pragma once
+
+#define KERNELBASE 0x80000000LL  // QEMU
+#define PAGESIZE 4096
+#define PMEMEND (KERNELBASE + 128 * 1024 * 1024)

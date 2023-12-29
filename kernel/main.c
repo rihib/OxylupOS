@@ -43,6 +43,11 @@ void main(void) {
       PANIC("Cannot print");
     }
 
+    phys_addr_t pages0 = alloc_pages(2);
+    phys_addr_t pages1 = alloc_pages(1);
+    printf("pages0 = %x\n", pages0);
+    printf("pages1: %x\n", pages1);
+
     initidleproc();
     proca = initproc((uintptr_t)proca_func);
     procb = initproc((uintptr_t)procb_func);

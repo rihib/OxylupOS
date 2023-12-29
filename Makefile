@@ -5,6 +5,7 @@ C_SRCS = \
 	$C/stdlib.c
 K_SRCS = \
 	$K/main.c \
+	$K/mem.c \
 	$K/proc.c \
 	$K/riscvregs.c \
 	$K/sched.c \

@@ -6,6 +6,9 @@
 // main.c
 void main(void);
 
+// mem.c
+phys_addr_t alloc_pages(int n);
+
 // proc.c
 void initidleproc(void);
 struct pcb *initproc(uintptr_t pc);
