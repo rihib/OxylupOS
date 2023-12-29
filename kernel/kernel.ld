@@ -19,4 +19,7 @@ SECTIONS {
   .bss : ALIGN(16) {
     *(.bss .bss.* .sbss .sbss.*);
   }
+
+  . = ALIGN(4096);
+  PROVIDE(__kernel_end = .);
 }
