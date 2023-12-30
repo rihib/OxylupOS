@@ -7,6 +7,8 @@
 void main(void);
 
 // mem.c
+void map_kernelpage(pagetable_t pagetable);
+void map_page(pagetable_t pt2, uint64_t va, phys_addr_t pa, uint64_t flags);
 phys_addr_t alloc_pages(int n);
 
 // proc.c

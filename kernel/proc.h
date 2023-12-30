@@ -12,4 +12,5 @@ struct pcb {
   enum procstate state;
   uintptr_t sp;
   uintptr_t kstack[13];
+  pagetable_t pagetable;
 };

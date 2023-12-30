@@ -2,6 +2,7 @@
 
 #include "common/stdlib.h"
 #include "common/types.h"
+#include "prototypes.h"
 #include "stdio.h"
 
 // TODO: Multicore support. Maybe need to save cpu state?
@@ -24,10 +25,16 @@ struct pcb *initproc(uintptr_t pc) {
       proc = &proctable[i];
       uintptr_t *sp = (uintptr_t *)&proc->kstack[sizeof(proc->kstack)];
       memset(proc->kstack, 0, sizeof(proc->kstack));
+      pagetable_t pagetable = (pagetable_t)alloc_pages(1);
+      if (!pagetable) {
+        PANIC("Failed to allocate page");
+      }
+      map_kernelpage(pagetable);
       proc->pid = i + 1;
       proc->state = RUNNABLE;
       proc->sp = (uintptr_t)sp;
-      proc->kstack[sizeof(proc->kstack)] = pc;
+      proc->kstack[12] = pc;
+      proc->pagetable = pagetable;
       return proc;
     }
   }

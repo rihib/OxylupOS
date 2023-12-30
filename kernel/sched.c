@@ -1,5 +1,8 @@
+#include "common/types.h"
+#include "mem.h"
 #include "proc.h"
 #include "prototypes.h"
+#include "riscvregs.h"
 
 extern struct pcb proctable[NPROC];
 extern struct pcb *currproc;
@@ -27,6 +30,10 @@ void sched_yield(void) {
   if (!next) {
     next = idleproc;
   }
+
+  sfence_vma();
+  write_satp(SATP_MODE_SV39 | (uint64_t)next->pagetable / PAGESIZE);
+  sfence_vma();
 
   prev = currproc;
   currproc = next;
