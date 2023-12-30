@@ -2,6 +2,12 @@
 
 #include "common/types.h"
 
+#define SATP_MODE_SV39 (8LL << 60)
+
+static inline void sfence_vma(void) {
+  __asm__ __volatile__("sfence.vma zero, zero");
+}
+
 // FIXME: Maybe macros are better?
 // FIXME: Better to remove duplicated code
 

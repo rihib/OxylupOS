@@ -44,7 +44,13 @@ void main(void) {
     }
 
     phys_addr_t pages0 = alloc_pages(2);
+    if (!pages0) {
+      PANIC("Failed to allocate page");
+    }
     phys_addr_t pages1 = alloc_pages(1);
+    if (!pages1) {
+      PANIC("Failed to allocate page");
+    }
     printf("pages0 = %x\n", pages0);
     printf("pages1: %x\n", pages1);
 

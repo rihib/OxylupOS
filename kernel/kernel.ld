@@ -2,6 +2,7 @@ ENTRY(initstack)
 
 SECTIONS {
   . = 0x80000000; /* QEMU */
+  __kernel_base = .;
 
   .text : ALIGN(4096) {
     KEEP(*(.text.boot));
@@ -21,5 +22,7 @@ SECTIONS {
   }
 
   . = ALIGN(4096);
-  PROVIDE(__kernel_end = .);
+  __ram_start = .;
+  . += 64 * 1024 * 1024;
+  __ram_end = .;
 }

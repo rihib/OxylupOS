@@ -8,9 +8,10 @@ typedef unsigned long long uint64_t;
 typedef uint64_t size_t;
 typedef uint64_t phys_addr_t;
 typedef uint64_t uintptr_t;
+typedef uint64_t *pagetable_t;
 
 #ifndef NULL
-#define NULL ((void*)0)
+#define NULL ((void *)0)
 #endif
 
 typedef uint8_t bool_t;
