@@ -1,22 +1,22 @@
 ENTRY(initstack)
 
 SECTIONS {
-  . = 0x80000000; /* QEMU */
+  . = 0x80000000;
 
   .text : ALIGN(4096) {
     KEEP(*(.text.boot));
     *(.text .text.*);
   }
 
-  .rodata : ALIGN(16) {
+  .rodata : ALIGN(4) {
     *(.rodata .rodata.* .srodata .srodata.*);
   }
 
-  .data : ALIGN(16) {
+  .data : ALIGN(4) {
     *(.data .data.* .sdata .sdata.*);
   }
 
-  .bss : ALIGN(16) {
+  .bss : ALIGN(4) {
     *(.bss .bss.* .sbss .sbss.*);
   }
 
