@@ -63,12 +63,12 @@ QEMUOPTS = \
 	-machine virt \
 	-nographic
 
-ifeq ($(BIT),32)
-	CFLAGS += --target=riscv32
-	QEMU = $(QEMU32)
-else
+ifeq ($(BIT),64)
 	CFLAGS += --target=riscv64
 	QEMU = $(QEMU64)
+else
+	CFLAGS += --target=riscv32
+	QEMU = $(QEMU32)
 endif
 
 ifdef DEBUG

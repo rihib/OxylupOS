@@ -10,8 +10,8 @@ void initregs(void) {
   set_mstatus_mpp('S');
   write_medeleg(0xffff);
   write_mideleg(0xffff);
-  write_mepc((uint64_t)main);
-  write_pmpaddr0(0x3fffffffffffffull);
+  write_mepc((phys_addr_t)main);
+  write_pmpaddr0(0xffffffff);
   write_pmpcfg0(0xf);
   write_sie(read_sie() | 0b1000100010);
   write_satp(0);
@@ -19,7 +19,7 @@ void initregs(void) {
 }
 
 void set_mstatus_mpp(char mode) {
-  uint64_t mstatus = read_mstatus();
+  phys_addr_t mstatus = read_mstatus();
 
   if (mode == 'M' || mode == 'S' || mode == 'U') {
     mstatus &= ~0b1100000000000;
