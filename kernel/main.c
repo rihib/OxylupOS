@@ -40,6 +40,7 @@ void main(void) {
       PANIC("Cannot print");
     }
 
+    init_next_freepage();
     phys_addr_t pages0 = alloc_pages(2);
     phys_addr_t pages1 = alloc_pages(1);
     printf("pages0 = %x\n", pages0);

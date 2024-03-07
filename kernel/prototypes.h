@@ -8,6 +8,7 @@ void main(void);
 
 // mem.c
 phys_addr_t alloc_pages(int n);
+void init_next_freepage(void);
 
 // proc.c
 void initidleproc(void);

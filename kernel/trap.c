@@ -3,7 +3,7 @@
 #include "riscvregs.h"
 #include "stdio.h"
 
-void inittrap(void) { write_stvec((phys_addr_t)trapentry); }
+void inittrap(void) { write_stvec((reg_t)trapentry); }
 
 __attribute__((naked)) __attribute__((aligned(4))) void trapentry(void) {
   __asm__ __volatile__(
@@ -81,9 +81,9 @@ __attribute__((naked)) __attribute__((aligned(4))) void trapentry(void) {
 }
 
 void traphandler(void) {
-  phys_addr_t scause = read_scause();
-  phys_addr_t stval = read_stval();
-  phys_addr_t user_pc = read_sepc();
+  reg_t scause = read_scause();
+  reg_t stval = read_stval();
+  reg_t user_pc = read_sepc();
 
   PANIC("unexpected trap scause=%x, stval=%x, sepc=%x\n", scause, stval,
         user_pc);

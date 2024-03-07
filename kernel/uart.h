@@ -13,12 +13,12 @@
 #define MSR 0b110
 #define SPR 0b111
 
-static inline uint8_t read_uart(phys_addr_t offset) {
+static inline uint8_t read_uart(reg_t offset) {
   uint8_t *addr = (uint8_t *)(UART0 + offset);
   return *addr;
 }
 
-static inline void write_uart(phys_addr_t offset, uint8_t val) {
+static inline void write_uart(reg_t offset, uint8_t val) {
   uint8_t *addr = (uint8_t *)(UART0 + offset);
   *addr = val;
 }

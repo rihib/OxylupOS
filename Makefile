@@ -77,6 +77,10 @@ ifdef DEBUG
   QEMUOPTS += $(QEMUDEBUGOPTS)
 endif
 
+ifdef LOG
+	QEMUOPTS += -d unimp,guest_errors,int,cpu_reset -D qemu.log
+endif
+
 ifdef GDB
 	QEMUOPTS += -S -gdb tcp::25501
 endif
@@ -100,4 +104,4 @@ $K/kernel.elf: $(C_SRCS) $(K_SRCS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(C_SRCS) $(K_SRCS)
 
 clean:
-	rm -f $K/kernel.elf $K/kernel.map $C/*.o $C/*.d $K/*.o $K/*.d
+	rm -f $K/kernel.elf $K/kernel.map $C/*.o $C/*.d $K/*.o $K/*.d qemu.log
